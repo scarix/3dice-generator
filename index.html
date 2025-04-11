@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>3D Dice roller</title>
+  <link rel="icon" type="image/svg+xml" href="/vite.svg"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.1/css/all.css" integrity="sha384-y++enYq9sdV7msNmXr08kJdkX4zEI1gMjjkw0l9ttOepH7fMdhb7CePwuRQCfwCr" crossorigin="anonymous">
+</head>
+
+<body>
+<!-- Main -->
+<div id="main" class="d-flex flex-column h-100">
+  <div class="main-inner">
+
+    <section class="divider">
+      <div class="page-end"></div>
+    </section>
+
+    <section class="dice-display">
+      <div id="dice-box"></div>
+    </section>
+
+    <section class="dice-setting">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="content">
+              <h2 class="text-center">ENTER YOUR DICE</h2>
+              <div id="dice-interface">
+                <div class="adv-roller">
+                  <form class="adv-roller--form">
+                    <div class="input-group">
+                      <input id="dice-input" class="adv-roller--notation form-control dice-input" placeholder="2d20kh1" autocomplete="off">
+                      <span class="clean-dice-input">
+                        <input class="adv-roller--clear clean-dice-input-action" type="reset" value="&#xf057;"/>
+                      </span>
+                      <span class="input-group-btn">
+                        <button id="btn-roll" class="btn btn-roll" type="submit">Roll</button>
+                      </span>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container mt-2 mt-sm-4">
+        <div class="row justify-content-center dice-selector">
+          <div class="col-4 col-sm-2 col-md-1 die" data-selector-value="4">
+            <i class="fas fa-dice-d4 fa-2x" style="color: #24a146"></i>
+            <span>4</span>
+          </div>
+          <div class="col-4 col-sm-2 col-md-1 die" data-selector-value="6">
+            <i class="fas fa-dice-d6 fa-2x" style="color: #27bcd1"></i>
+            <span>6</span>
+          </div>
+          <div class="col-4 col-sm-2 col-md-1 die" data-selector-value="8">
+            <i class="fas fa-dice-d8 fa-2x" style="color: #9334e6"></i>
+            <span>8</span>
+          </div>
+          <div class="col-4 col-sm-2 col-md-1 die" data-selector-value="10">
+            <i class="fas fa-dice-d10 fa-2x" style="color: #e13294"></i>
+            <span>10</span>
+          </div>
+          <div class="col-4 col-sm-2 col-md-1 die" data-selector-value="12">
+            <i class="fas fa-dice-d12 fa-2x" style="color: #d93025"></i>
+            <span>12</span>
+          </div>
+          <div class="col-4 col-sm-2 col-md-1 die" data-selector-value="20">
+            <i class="fas fa-dice-d20 fa-2x" style="color: #f36d00"></i>
+            <span>20</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+  </div>
+</div>
+
+<script type="module" src="src/js/main.js"></script>
+</body>
+</html>

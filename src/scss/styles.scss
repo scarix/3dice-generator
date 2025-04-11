@@ -1,0 +1,431 @@
+// Import all of Bootstrap's CSS
+@import "bootstrap/scss/bootstrap";
+
+
+html,
+body {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.main-inner {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: row;
+}
+
+#dice-box {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  background-image: url(/assets/woodgrain2.jpg);
+  background-size: cover;
+  box-shadow: inset -2vw 3vw 7vh #022, inset 2vw -3vw 5vh #222;
+  display: flex;
+
+  canvas {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+#roll {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  cursor: pointer;
+}
+
+.dg.ac .dg.a {
+  float: left;
+  margin-left: 15px;
+  margin-left: 15px;
+  overflow-y: visible;
+}
+
+
+
+
+
+
+
+.dice-input {
+  padding-right: 3.05rem;
+}
+
+.clean-dice-input {
+  position: relative;
+}
+
+.clean-dice-input {
+  position: relative;
+}
+
+.clean-dice-input-action {
+  line-height: 50px;
+  position: absolute;
+  left: -2.45rem;
+  font-size: 1.6em;
+  padding-right: 13px;
+  /*color: #bd2130;*/
+  color: #242424;
+  z-index: 10;
+  background: unset;
+  border: unset;
+}
+
+.clean-dice-input-action:hover {
+  color: #3E3E3E;
+  cursor: pointer;
+}
+
+
+
+
+
+#main {
+  transition: margin-left .5s;
+  background-color: #ffffff;
+  min-height: 100vh;
+  /* height: 100vh;
+  overflow: hidden;
+  backface-visibility: hidden;
+  will-change: overflow;
+  display: flex;
+  position: relative; */
+}
+
+#main .main-inner {
+  /* overflow: auto;
+  width: 100%;
+  height: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none; */
+}
+
+.navbar .nav-item {
+  z-index: 5;
+}
+
+.sidebar {
+  margin: 0;
+  padding: 0;
+  background-color: #f1f1f1;
+  position: fixed;
+  height: 100%;
+  width: 0;
+  transition: 0.5s;
+  z-index: 10;
+  max-width: 100%;
+  /* padding-top: 20px; */
+  overflow: hidden;
+  white-space: nowrap;
+  will-change: overflow;
+  display: flex;
+}
+
+.sidebar-inner {
+  padding: 20px;
+}
+
+.sidebar h4 {
+  margin-bottom: 15px;
+  display: inline-block;
+}
+
+.sidebar h4::after {
+  content: "";
+  display: block;
+  height: 2px;
+  margin-top: 10px;
+  background: -webkit-gradient(linear, left top, right top, from(rgba(157, 10, 14, 0)), color-stop(#9d0a0e), color-stop(#9d0a0e), to(rgba(157, 10, 14, 0)));
+  background: -webkit-linear-gradient(left, rgba(157, 10, 14, 0), #9d0a0e, #9d0a0e, rgba(157, 10, 14, 0));
+  background: -o-linear-gradient(left, rgba(157, 10, 14, 0), #9d0a0e, #9d0a0e, rgba(157, 10, 14, 0));
+  background: linear-gradient(to right, rgba(157, 10, 14, 0), #9d0a0e, #9d0a0e, rgba(157, 10, 14, 0));
+}
+
+.sidebar .toggle {
+  display: block;
+}
+
+.sidebar .close-sidebar {
+  float: right;
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #242424;
+  text-shadow: 0 1px 0 #fff;
+  opacity: .5;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 4px 10px 9px 10px;
+  cursor: pointer;
+}
+
+.sidebar .close-sidebar:not(:disabled):not(.disabled):hover {
+  opacity: .75;
+}
+
+.divider .page-end {
+  clear: both;
+  width: auto;
+  height: 68px;
+  background: url('../assets/images/page-end-invert.png') center center no-repeat;
+  background-size: auto;
+  background-size: auto 35px !important;
+  margin: -34px 0 -34px 0;
+  position: relative;
+}
+
+.divider .page-end::before {
+  content: "";
+  position: absolute;
+  height: 1px;
+  right: 56%;
+  bottom: 50%;
+  left: 0;
+  border-bottom: 1px solid #fff;
+}
+
+.divider .page-end::after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  left: 56%;
+  bottom: 50%;
+  right: 0;
+  border-bottom: 1px solid #fff;
+}
+
+@media screen and (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+  }
+
+  #main {
+    margin-left: 0 !important;
+  }
+}
+
+/* ========== MAIN SETTINGS ========== */
+
+.dice-setting {
+  padding: 60px 0 40px;
+  background: #9d0a0e;
+  color: #ffffff;
+  background-image: linear-gradient(to top right, #9d0a0e, #08090F);
+  min-width: 350px;
+  width: 25%;
+
+  .content {
+    max-width: 650px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+
+    h2 {
+      color: #fff;
+      margin-bottom: 40px;
+    }
+
+    .form-control {
+      height: 50px;
+      border-color: #242424;
+      border-radius: 0;
+
+      &:focus {
+        box-shadow: none;
+        border: 2px solid #243c4f;
+      }
+    }
+
+    .btn {
+      min-height: 50px;
+      border-radius: 0;
+      background: #242424;
+      color: #fff;
+      font-weight: 600;
+    }
+  }
+
+  h1,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #ffffff;
+  }
+}
+
+.dice-display {
+  flex-grow: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.dice-input {
+  padding-right: 3.05rem;
+}
+
+.clean-dice-input {
+  position: relative;
+}
+
+.clean-dice-input-action {
+  line-height: 50px;
+  position: absolute;
+  left: -2.45rem;
+  font-size: 1.6em;
+  padding-right: 13px;
+  /*color: #bd2130;*/
+  color: #242424;
+  z-index: 10;
+
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 900;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant:
+    normal;
+  text-rendering: auto;
+
+
+  &:hover {
+    color: #3E3E3E;
+    cursor: pointer;
+  }
+}
+
+.sidebar .settings-form-group {
+  /* max-height: calc(100vh - 76px); */
+  max-height: calc(100% - 36px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: 0 -20px;
+  padding: 0 20px;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+
+  .form-group{
+    /* margin-bottom: 1.5rem; */
+
+    .form-group label {
+      margin-bottom: 0.3rem;
+    }
+  }
+}
+
+/* ========== DICE DISPLAY ========== */
+
+.dice-selector .die {
+  transition: all .25s ease-in-out;
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+
+  position: relative;
+  display: table;
+
+  i {
+    width: 100%;
+    text-align: center;
+    opacity: 0.8;
+    /*text-shadow: 0 1px 0 #343A40;*/
+    text-shadow: unset;
+    font-weight: 900;
+  }
+
+  span{
+    position: absolute;
+    display: block;
+    width: 100%;
+    left: 0;
+    top: 0;
+    text-align: center;
+
+    font-size: 1.2em;
+    line-height: 1.7em;
+    text-shadow: 0 1px 0 #fff;
+  }
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+
+    i {
+      opacity: 1;
+    }
+  }
+}
+
+.see-more-presets {
+  position: relative;
+  height: 0;
+}
+
+a.see-presets,
+a.see-more-settings,
+a.see-more-presets,
+.navbar-dark .navbar-nav button.nav-link {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+a.see-presets:active,
+a.see-presets:focus,
+a.see-presets:hover,
+.navbar-dark .navbar-nav button.nav-link:active,
+.navbar-dark .navbar-nav button.nav-link:focus,
+.navbar-dark .navbar-nav button.nav-link:hover,
+a.see-more-settings:active,
+a.see-more-settings:focus,
+a.see-more-settings:hover,
+a.see-more-presets:active,
+a.see-more-presets:focus,
+a.see-more-presets:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.navbar-dark .navbar-nav button.nav-link:hover,
+a.see-presets:hover,
+a.see-more-settings:hover,
+a.see-more-presets:hover {
+  opacity: 0.8;
+}
+
+.see-more-presets.btn.collapsed i:before {
+  content: '\f107';
+}
+
+.see-more-presets.btn i:before {
+  content: '\f106';
+}
+
+.sortable-placeholder {
+  background: #aeaeae;
+  height: 44px;
+  margin-bottom: 10px;
+}
+
+.form-group label {
+  /* color: #ffffff; */
+}
