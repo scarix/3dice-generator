@@ -1,4 +1,3 @@
-import "../style.css";
 import '../scss/styles.scss'
 import DiceBox from "@3d-dice/dice-box";
 import DisplayResults from "@3d-dice/dice-ui/src/displayResults";
@@ -6,16 +5,16 @@ import DisplayResults from "@3d-dice/dice-ui/src/displayResults";
 import BoxControls from "@3d-dice/dice-ui/src/boxControls";
 import DiceParser from '@3d-dice/dice-parser-interface';
 import DiceTrayInteraction from "./src/diceTrayInteraction";
+import Swipe from "./src/swipe";
 
 // Import all of Bootstrap's JS
 import * as bootstrap from 'bootstrap'
-import {getElement} from "bootstrap/js/src/util/index.js";
-const diceBoxId = "#dice-box";
 
+const diceBoxId = "#dice-box";
 const diceBox = new DiceBox({
   container: diceBoxId,
   assetPath: "/assets/dice-box/",
-  theme: "rust",
+  theme: "default",
   offscreen: true,
   scale: 6,
 });
@@ -35,11 +34,6 @@ audios['audio4'].load();
 audios['audio5'].load();
 
 diceBox.init().then(async (world) => {
-  // console.log("Box is ready");
-
-  let finalResults = '';
-  let diceNotation = '';
-
   const DP = new DiceParser();
 
   const Controls = new BoxControls({
@@ -60,7 +54,7 @@ diceBox.init().then(async (world) => {
   // create display overlay
   const Display = new DisplayResults(diceBoxId);
 
-  // // create Roller Input
+  // create Roller Input
   const Roller = new DiceTrayInteraction({
     target: "#dice-interface",
     onSubmit: (notation) => diceBox.roll(notation),
@@ -76,6 +70,16 @@ diceBox.init().then(async (world) => {
 
     onResults: (results) => {
       Display.showResults(results);
+    },
+  });
+
+  // Define swipe action
+  const Swiper = new Swipe({
+    target: diceBoxId,
+    onSwipe: () => {
+      diceBox.clear();
+      Display.clear();
+      diceBox.roll(Roller.getNotation())
     },
   });
 
@@ -96,26 +100,10 @@ diceBox.init().then(async (world) => {
 
     // Temp random color test
     let newColor = '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
+    console.log("Dice-color: " + newColor);
     diceBox.updateConfig({'themeColor': newColor});
   };
 
-  let element = document.querySelector(diceBoxId);
-  element.addEventListener('swipe', (event) => {
-    document.querySelector('.adv-roller--form').submit();
-    console.log("SWIPE!")
-  });
-
-  // document.getElementById('btn-roll').addEventListener("click", (event) => {
-  //   event.preventDefault();
-  //
-  //   diceNotation = document.getElementById('dice-input').value;
-  //
-  //   if (diceNotation != undefined && diceNotation != '') {
-  //     diceBox.clear();
-  //     Display.clear();
-  //     diceBox.roll(DP.parseNotation(diceNotation));
-  //   }
-  // });
-
   diceBox.roll(["2d20"]);
 });
+

@@ -21,8 +21,8 @@ class DiceTrayInteraction {
     this.onResults = options?.onResults || noop
 
     // Global vars
-    this.diceSelectedOrder = [];
-    this.diceSelected = [];
+    this.diceSelectedOrder = []
+    this.diceSelected = []
 
     this.init()
   }
@@ -48,7 +48,11 @@ class DiceTrayInteraction {
   submitForm(e) {
     e.preventDefault()
     this.clear()
-    this.onSubmit(this.DRP.parseNotation(this.diceInput.value))
+    this.onSubmit(this.getNotation())
+  }
+
+  getNotation() {
+    return this.DRP.parseNotation(this.diceInput.value);
   }
 
   clear() {
