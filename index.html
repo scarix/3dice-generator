@@ -3,8 +3,14 @@
 <head>
   <meta charset="UTF-8"/>
   <title>3D Dice roller</title>
-  <link rel="icon" type="image/svg+xml" href="/vite.svg"/>
+  <link rel="icon" type="image/png" href="/assets/images/d20-logo-black-360x360.png"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <link rel="manifest" href="/manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="3D Dice roller">
+  <link rel="apple-touch-icon" href="/assets/images/d20-logo-black-192x192.png">
 
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.1/css/all.css" integrity="sha384-y++enYq9sdV7msNmXr08kJdkX4zEI1gMjjkw0l9ttOepH7fMdhb7CePwuRQCfwCr" crossorigin="anonymous">
 </head>
@@ -14,16 +20,37 @@
 <div id="main" class="d-flex flex-column h-100">
   <div class="main-inner">
 
-    <section class="divider">
-      <div class="page-end"></div>
-    </section>
-
     <section class="dice-display">
       <div id="dice-box"></div>
     </section>
 
     <section class="dice-setting">
-      <div class="container">
+      <nav class="navbar navbar-expand bg-dark app-navbar">
+        <div class="container-fluid">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <button class="btn btn-link text-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#presets-canvas" aria-controls="presets-canvas">
+                <i class="fas fa-cubes fa-lg"></i>
+                <small>Presets</small>
+              </button>
+            </li>
+            <li class="nav-item">
+              <button class="btn btn-link text-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#history-canvas" aria-controls="history-canvas">
+                <i class="fas fa-history fa-lg"></i>
+                <small>History</small>
+              </button>
+            </li>
+            <li class="nav-item">
+              <button class="btn btn-link text-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#settings-canvas" aria-controls="settings-canvas">
+                <i class="fas fa-cog fa-lg"></i>
+                <small>Settings</small>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="container mb-3 mb-md-0">
         <div class="row">
           <div class="col-sm-12">
             <div class="content">
@@ -48,34 +75,61 @@
         </div>
       </div>
 
-      <div class="container mt-2 mt-sm-4">
+      <div class="container mt-sm-4 dice-selector-wrapper">
         <div class="row justify-content-center dice-selector">
-          <div class="col-4 col-sm-2 col-md-1 die" data-selector-value="4">
-            <i class="fas fa-dice-d4 fa-2x" style="color: #24a146"></i>
+          <div class="col-2 col-md-1 die d4" data-selector-value="4">
+            <i class="fas fa-dice-d4 fa-2x"></i>
             <span>4</span>
           </div>
-          <div class="col-4 col-sm-2 col-md-1 die" data-selector-value="6">
-            <i class="fas fa-dice-d6 fa-2x" style="color: #27bcd1"></i>
+          <div class="col-2 col-md-1 die d6" data-selector-value="6">
+            <i class="fas fa-dice-d6 fa-2x"></i>
             <span>6</span>
           </div>
-          <div class="col-4 col-sm-2 col-md-1 die" data-selector-value="8">
-            <i class="fas fa-dice-d8 fa-2x" style="color: #9334e6"></i>
+          <div class="col-2 col-md-1 die d8" data-selector-value="8">
+            <i class="fas fa-dice-d8 fa-2x"></i>
             <span>8</span>
           </div>
-          <div class="col-4 col-sm-2 col-md-1 die" data-selector-value="10">
-            <i class="fas fa-dice-d10 fa-2x" style="color: #e13294"></i>
+          <div class="col-2 col-md-1 die d10" data-selector-value="10">
+            <i class="fas fa-dice-d10 fa-2x"></i>
             <span>10</span>
           </div>
-          <div class="col-4 col-sm-2 col-md-1 die" data-selector-value="12">
-            <i class="fas fa-dice-d12 fa-2x" style="color: #d93025"></i>
+          <div class="col-2 col-md-1 die d12" data-selector-value="12">
+            <i class="fas fa-dice-d12 fa-2x"></i>
             <span>12</span>
           </div>
-          <div class="col-4 col-sm-2 col-md-1 die" data-selector-value="20">
-            <i class="fas fa-dice-d20 fa-2x" style="color: #f36d00"></i>
+          <div class="col-2 col-md-1 die d20" data-selector-value="20">
+            <i class="fas fa-dice-d20 fa-2x"></i>
             <span>20</span>
           </div>
         </div>
       </div>
+
+      <div class="offcanvas text-bg-dark offcanvas-end" tabindex="-1" id="presets-canvas" aria-labelledby="offcanvasPresets" aria-modal="true" role="dialog">
+        <div class="offcanvas-header">
+          <h3 class="offcanvas-title" id="offcanvasPresetLabel">Presets</h3>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body dice-presets"></div>
+      </div>
+
+      <div class="offcanvas text-bg-dark offcanvas-end" tabindex="-1" id="history-canvas" aria-labelledby="offcanvasHistory" aria-modal="true" role="dialog">
+        <div class="offcanvas-header">
+          <h3 class="offcanvas-title" id="offcanvasHistoryLabel">History</h3>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body dice-history"></div>
+      </div>
+
+      <div class="offcanvas text-bg-dark offcanvas-end" tabindex="-1" id="settings-canvas" aria-labelledby="offcanvasSettings" aria-modal="true" role="dialog">
+        <div class="offcanvas-header">
+          <h3 class="offcanvas-title" id="offcanvasSettingsLabel">Settings</h3>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body dice-global-setting"></div>
+      </div>
+
+
+
     </section>
 
 

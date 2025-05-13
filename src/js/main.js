@@ -3,9 +3,9 @@ import DiceBox from "@3d-dice/dice-box";
 import DisplayResults from "@3d-dice/dice-ui/src/displayResults";
 // import AdvancedRoller from "@3d-dice/dice-ui/src/advancedRoller";
 import BoxControls from "@3d-dice/dice-ui/src/boxControls";
-import DiceParser from '@3d-dice/dice-parser-interface';
 import DiceTrayInteraction from "./src/diceTrayInteraction";
 import Swipe from "./src/swipe";
+import DiceHistory from "./src/diceHistory";
 
 // Import all of Bootstrap's JS
 import * as bootstrap from 'bootstrap'
@@ -33,8 +33,9 @@ audios['audio3'].load();
 audios['audio4'].load();
 audios['audio5'].load();
 
+const History = new DiceHistory({target: ".dice-history",});
+
 diceBox.init().then(async (world) => {
-  const DP = new DiceParser();
 
   const Controls = new BoxControls({
     themes: ["default", "diceOfRolling", "gemstone", "gemstoneMarble", "smooth", "rock", "rust", "wooden"],
@@ -70,6 +71,9 @@ diceBox.init().then(async (world) => {
 
     onResults: (results) => {
       Display.showResults(results);
+
+      console.log(results);
+
     },
   });
 
@@ -79,13 +83,14 @@ diceBox.init().then(async (world) => {
     onSwipe: () => {
       diceBox.clear();
       Display.clear();
-      diceBox.roll(Roller.getNotation())
+      diceBox.roll(Roller.getNotation());
     },
   });
 
   // pass dice rolls to Advanced Roller to handle
   diceBox.onRollComplete = (results) => {
-    Roller.handleResults(results);
+    const finalResults = Roller.handleResults(results);
+    History.logHistory(results, finalResults,  Roller.getRawNotation());
   };
 
   // add sound to roll
@@ -107,3 +112,36 @@ diceBox.init().then(async (world) => {
   diceBox.roll(["2d20"]);
 });
 
+// Show individual die results on click
+document.addEventListener("click", function(event){
+  const target = event.target.closest(".dice-summery"); // Or any other selector.
+  if(target){
+    event.preventDefault();
+    target.classList.toggle("individual-results");
+  }
+});
+
+// Define swipe action to close off-canvases
+new Swipe({
+  target: '#presets-canvas',
+  onSwipe: () => {
+    document.querySelector('#presets-canvas .btn-close').click();
+  },
+  direction: "right",
+});
+
+new Swipe({
+  target: '#history-canvas',
+  onSwipe: () => {
+    document.querySelector('#history-canvas .btn-close').click();
+  },
+  direction: "right",
+});
+
+new Swipe({
+  target: '#settings-canvas',
+  onSwipe: () => {
+    document.querySelector('#settings-canvas .btn-close').click();
+  },
+  direction: "right",
+});

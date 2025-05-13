@@ -5,7 +5,7 @@ class DiceTrayInteraction {
     this.target = options.target ? document.querySelector(options.target) : document.body
     this.form = document.querySelector('.adv-roller--form')
     this.diceInput = document.querySelector('#dice-input')
-    this.diceSelectors = document.getElementsByClassName("die");
+    this.diceSelectors = document.querySelectorAll(".dice-selector .die");
 
     // create Notation Parser - pass on options
     this.DRP = new DiceParser({
@@ -53,6 +53,12 @@ class DiceTrayInteraction {
 
   getNotation() {
     return this.DRP.parseNotation(this.diceInput.value);
+  }
+
+  getRawNotation() {
+    // TODO: find way to get correct notation by parser?
+    // return this.DRP.initParser;
+    return this.diceInput.value;
   }
 
   clear() {

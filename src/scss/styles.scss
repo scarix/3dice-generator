@@ -1,5 +1,6 @@
 // Import all of Bootstrap's CSS
 @import "bootstrap/scss/bootstrap";
+@import "variables";
 
 html,
 body {
@@ -9,6 +10,8 @@ body {
   overflow: hidden;
   width: 100%;
   height: 100%;
+  height: 100vh;
+  height: 100dvh;
   margin: 0;
   padding: 0;
   position: relative;
@@ -69,42 +72,9 @@ body {
   position: relative;
 }
 
-.clean-dice-input-action {
-  line-height: 50px;
-  position: absolute;
-  left: -2.45rem;
-  font-size: 1.6em;
-  padding-right: 13px;
-  /*color: #bd2130;*/
-  color: #242424;
-  z-index: 10;
-  background: unset;
-  border: unset;
-}
-
-.clean-dice-input-action:hover {
-  color: #3E3E3E;
-  cursor: pointer;
-}
-
 #main {
   transition: margin-left .5s;
   background-color: #ffffff;
-  min-height: 100vh;
-  /* height: 100vh;
-  overflow: hidden;
-  backface-visibility: hidden;
-  will-change: overflow;
-  display: flex;
-  position: relative; */
-}
-
-#main .main-inner {
-  /* overflow: auto;
-  width: 100%;
-  height: auto;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: none; */
 }
 
 .navbar .nav-item {
@@ -157,7 +127,7 @@ body {
   font-size: 1.8rem;
   font-weight: 700;
   line-height: 1;
-  color: #242424;
+  color: $body-color;
   text-shadow: 0 1px 0 #fff;
   opacity: .5;
   position: absolute;
@@ -169,37 +139,6 @@ body {
 
 .sidebar .close-sidebar:not(:disabled):not(.disabled):hover {
   opacity: .75;
-}
-
-.divider .page-end {
-  clear: both;
-  width: auto;
-  height: 68px;
-  background: url('../assets/images/page-end-invert.png') center center no-repeat;
-  background-size: auto;
-  background-size: auto 35px !important;
-  margin: -34px 0 -34px 0;
-  position: relative;
-}
-
-.divider .page-end::before {
-  content: "";
-  position: absolute;
-  height: 1px;
-  right: 56%;
-  bottom: 50%;
-  left: 0;
-  border-bottom: 1px solid #fff;
-}
-
-.divider .page-end::after {
-  content: "";
-  position: absolute;
-  height: 1px;
-  left: 56%;
-  bottom: 50%;
-  right: 0;
-  border-bottom: 1px solid #fff;
 }
 
 @media screen and (max-width: 768px) {
@@ -215,19 +154,22 @@ body {
 /* ========== MAIN SETTINGS ========== */
 
 .dice-setting {
-  padding: 60px 0 40px;
+  padding: 0 0 40px;
   background: #9d0a0e;
   color: #ffffff;
   background-image: linear-gradient(to top right, #9d0a0e, #08090F);
   min-width: 350px;
-  width: 25%;
+  //width: 25%;
+  display: flex;
+  align-items: start;
+  flex-direction: column;
 
   @media screen and (max-width: 768px) {
     width: 100%;
     min-width: unset;
-    height: 25%;
     min-height: 150px;
-    padding: 20px 0;
+    padding: 1.25rem 0 0;
+    position: relative;
   }
 
   .content {
@@ -246,39 +188,83 @@ body {
       }
     }
 
-    .form-control {
-      height: 50px;
-      border-color: #242424;
-      border-radius: 0;
+    #dice-interface {
+      .form-control {
+        height: 50px;
+        border-color: $body-color;
+        border-radius: 0;
 
-      &:focus {
-        box-shadow: none;
-        border: 2px solid #243c4f;
+        &:focus {
+          box-shadow: none;
+          border: 2px solid #243c4f;
+        }
+      }
+
+      .btn {
+        min-height: 50px;
+        border-radius: 0;
+        background: $body-color;
+        color: #fff;
+        font-weight: 600;
+      }
+    }
+
+    h1,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: #ffffff;
+    }
+  }
+
+  .app-navbar {
+    width: 100%;
+    @media screen and (min-width: 768px) {
+      margin-bottom: 2.5rem;
+    }
+
+    @media screen and (max-width: 768px) {
+        order: 10;
+    }
+
+    // only for standalone mode
+    @media screen and (max-width: 768px) and (display-mode: standalone) {
+      padding-bottom: 1.125rem;
+    }
+
+    &.navbar-expand {
+      .navbar-nav {
+        justify-content: space-around;
+        width: 100%;
       }
     }
 
     .btn {
-      min-height: 50px;
-      border-radius: 0;
-      background: #242424;
-      color: #fff;
-      font-weight: 600;
-    }
-  }
+      text-decoration: none;
+      text-align: center;
 
-  h1,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: #ffffff;
+      // only for standalone mode
+      @media screen and (max-width: 768px) and (display-mode: standalone) {
+        padding-top: 0;
+      }
+
+      small {
+        display: block;
+        font-size: 0.7em;
+      }
+    }
   }
 }
 
 .dice-display {
   flex-grow: 1;
-  width: 100%;
-  height: 100%;
+  //width: 100%;
+  //height: 100%;
+
+  @media screen and (max-width: 768px) {
+    flex-grow: 1;
+  }
 }
 
 .dice-input {
@@ -292,12 +278,14 @@ body {
 .clean-dice-input-action {
   line-height: 50px;
   position: absolute;
-  left: -2.45rem;
+  left: -10px;
   font-size: 1.6em;
   padding-right: 13px;
   /*color: #bd2130;*/
-  color: #242424;
+  color: $body-color;
   z-index: 10;
+  background: unset;
+  border: unset;
 
   font-family: "Font Awesome 5 Pro";
   font-weight: 900;
@@ -305,10 +293,9 @@ body {
   -webkit-font-smoothing: antialiased;
   display: inline-block;
   font-style: normal;
-  font-variant:
-    normal;
+  font-variant: normal;
   text-rendering: auto;
-
+  transform: translate(-100%, 0);
 
   &:hover {
     color: #3E3E3E;
@@ -321,12 +308,12 @@ body {
   max-height: calc(100% - 36px);
   overflow-y: auto;
   overflow-x: hidden;
-  margin: 0 -20px;
-  padding: 0 20px;
+  margin: 0 -1.25rem;
+  padding: 0 1.25rem;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: none;
 
-  .form-group{
+  .form-group {
     /* margin-bottom: 1.5rem; */
 
     .form-group label {
@@ -337,45 +324,132 @@ body {
 
 /* ========== DICE DISPLAY ========== */
 
-.dice-selector .die {
-  transition: all .25s ease-in-out;
-  user-select: none;
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -o-user-select: none;
-
-  position: relative;
-  display: table;
-
-  i {
-    width: 100%;
-    text-align: center;
-    opacity: 0.8;
-    /*text-shadow: 0 1px 0 #343A40;*/
-    text-shadow: unset;
-    font-weight: 900;
-  }
-
-  span{
+.dice-selector-wrapper {
+  @media screen and (max-width: 768px) {
     position: absolute;
-    display: block;
+    top: -50px;
+    margin: 0 !important;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    background-color: rgba(55, 55, 55, 0.2);
     width: 100%;
-    left: 0;
-    top: 0;
-    text-align: center;
-
-    font-size: 1.2em;
-    line-height: 1.7em;
-    text-shadow: 0 1px 0 #fff;
+    max-width: initial;
   }
+}
 
-  &:hover {
-    cursor: pointer;
-    transform: scale(1.1);
+.dice-selector,
+.dice-summery {
+  .die {
+    &.d4 i {color: $d4-color}
+    &.d6 i {color: $d6-color}
+    &.d8 i {color: $d8-color}
+    &.d10 i {color: $d10-color}
+    &.d12 i {color: $d12-color}
+    &.d20 i {color: $d20-color}
+  }
+}
+
+.dice-selector {
+  color: #ffffff;
+
+  .die {
+    transition: all .25s ease-in-out;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+
+    position: relative;
+    display: table;
 
     i {
-      opacity: 1;
+      width: 100%;
+      text-align: center;
+      opacity: 0.8;
+      /*text-shadow: 0 1px 0 #343A40;*/
+      text-shadow: unset;
+      font-weight: 900;
+    }
+
+    span {
+      position: absolute;
+      display: block;
+      width: 100%;
+      left: 0;
+      top: 0;
+      text-align: center;
+
+      font-size: 1.2em;
+      line-height: 1.7em;
+      text-shadow: 0 1px 0 #fff;
+    }
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.1);
+
+      i {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.dice-summery {
+  &:hover {
+    cursor: pointer;
+  }
+
+  .die {
+    transition: all .15s ease-in-out;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    position: relative;
+    display: block;
+
+
+    i {
+      width: 100%;
+      text-align: center;
+      /*text-shadow: 0 1px 0 #343A40;*/
+      text-shadow: unset;
+      font-weight: 900;
+    }
+
+    span {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      text-align: center;
+      opacity: 0;
+      color: #ffffff;
+      vertical-align: middle;
+      display: inline-block;
+      font-size: 0.8em;
+      line-height: 25px;
+    }
+  }
+
+  &.individual-results {
+    .die {
+      background: rgba(24,24,24, 0.7);
+
+      i {
+        opacity: 0;
+      }
+
+      span {
+        opacity: 1;
+      }
     }
   }
 }
@@ -432,4 +506,54 @@ a.see-more-presets:hover {
 
 .form-group label {
   /* color: #ffffff; */
+}
+
+.offcanvas {
+  padding-bottom: 1.5rem;
+}
+
+.dice-history {
+  overflow-y: auto;
+}
+
+.history-card {
+  --bs-card-spacer-y: 0.5rem;
+  --bs-card-spacer-x: 0.5rem;
+
+  --bs-card-cap-padding-y: 0.25rem;
+  --bs-card-cap-padding-x: 0.5rem;
+
+  .card-body {
+    display: flex;
+
+    .total-result {
+      min-width: 80px;
+      font-size: 1.5rem;
+    }
+
+    .dice-summery {
+      flex-grow: 1;
+
+      .fa-stack{
+        font-size: 1.33333em;
+        line-height: .75em;
+        vertical-align: -.0667em;
+        width: 1em;
+        height: 1em;
+
+        .fa-stack-2x {
+          font-size: 1em;
+        }
+
+        .fa-stack-1x {
+          font-size: 0.5em;
+          line-height: 2em;
+        }
+      }
+    }
+  }
+
+  .dice-notation {
+    font-weight: bold;
+  }
 }
